@@ -12,10 +12,23 @@ $router->get('/', function () use ($router) {
 |--------------------------------------------------------------------------
 */
 
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
 
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('/products', 'ProductController@getProducts');
+    $router->post('/products', 'ProductController@add');
+    $router->get('/products/{id}', 'ProductController@show');
+    $router->put('/products/{id}', 'ProductController@update');
+    $router->delete('/products/{id}', 'ProductController@delete');
+});
 
+/*
 $router->get('/products', 'ProductController@getProducts');
 $router->post('/products', 'ProductController@add');
 $router->get('/products/{id}', 'ProductController@show');
 $router->put('/products/{id}', 'ProductController@update');
 $router->delete('/products/{id}', 'ProductController@delete');
+
+*/
